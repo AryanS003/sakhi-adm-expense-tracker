@@ -16,7 +16,6 @@ def get_expenses():
     return df
 
 def add_expense(date, category, amount, note=""):
-    """Add a new expense entry with optional transaction date."""
     df = conn.read(worksheet="Sheet1").dropna(how="all")
 
     # If no date is given, use today's date
@@ -71,23 +70,4 @@ with st.form("expense_form"):
             st.success(f"Added: {txn_date} | {category} - {amount}")
         else:
             st.success(f"Added: {datetime.now().date()} | {category} - {amount}")
-
-# Show expenses
-st.header("📊 Expense Data")
-df = get_expenses()
-if not df.empty:
-    st.subheader("📅 Daily Summary")
-    st.dataframe(summary_df(df, "daily"))
-
-    st.subheader("📆 Weekly Summary")
-    st.dataframe(summary_df(df, "weekly"))
-
-    st.subheader("📈 Monthly Summary")
-    st.dataframe(summary_df(df, "monthly"))
-    
-    st.subheader("📜 Full Expense Log")
-    st.dataframe(df)
-else:
-    st.info("No expenses yet. Add your first one above!")
-
 
