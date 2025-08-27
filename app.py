@@ -12,7 +12,6 @@ def get_expenses():
 
     if not df.empty:
         df["Date"] = pd.to_datetime(df["Date"])
-        df = df.sort_values("Date", ascending=False).reset_index(drop=True)
 
     return df
 
@@ -90,4 +89,5 @@ if not df.empty:
     st.dataframe(df)
 else:
     st.info("No expenses yet. Add your first one above!")
+
 
